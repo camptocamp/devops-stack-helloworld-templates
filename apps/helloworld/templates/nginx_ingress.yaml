@@ -34,7 +34,7 @@ metadata:
   name: nginx-redirect-https
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web
-    traefik.ingress.kubernetes.io/router.middlewares: "{{.Release.Namespace}}-redirect-https@kubernetescrd"
+    traefik.ingress.kubernetes.io/router.middlewares: {{.Release.Namespace}}-redirect-https@kubernetescrd
 spec:
   rules:
   - host: 34.252.10.234.traefik.me
