@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-staging
+    ingress.kubernetes.io/ssl-redirect: "true"
+    kubernetes.io/ingress.allow-http: "false"
+    traefik.ingress.kubernetes.io/router.tls: "true"
+  name: nginx-ingress
+spec:
+  rules:
+  - host: '34.252.10.234.traefik.me'
+    http:
+      paths:
+      - backend:
+          service:
+            name: nginx-clusterip
+            port:
+              number: 8888
+        path: /
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - 34.252.10.234.traefik.me
+    secretName: nginx-ingress
