@@ -19,10 +19,10 @@ spec:
         name: helloworld
         ports:
         - containerPort: 80
-          name: helloworld_http
+          name: helloworld-http
           protocol: TCP
         - containerPort: 8080
-          name: stub_status
+          name: stub-status
           protocol: TCP
         resources:
           limits:

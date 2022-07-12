@@ -8,7 +8,7 @@ spec:
   ports:
   - port: 8080
     protocol: TCP
-    targetPort: helloworld_http
+    targetPort: helloworld-http
   selector:
     app: helloworld-devops-stack
   type: ClusterIP
