@@ -1,0 +1,17 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    app: helloworld-devops-stack
+  name: helloworld-devops-stack-servicemonitor
+spec:
+  endpoints:
+  - interval: 30s
+    path: /metrics
+    port: metrics
+  # namespaceSelector:
+  #   matchNames:
+  #   - helloworld
+  selector:
+    matchLabels:
+      app: helloworld-devops-stack
