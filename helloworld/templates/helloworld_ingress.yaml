@@ -19,7 +19,7 @@ spec:
           service:
             name: helloworld-devops-stack-clusterip
             port:
-              number: 8888
+              number: 8080
         path: /
         pathType: ImplementationSpecific
   tls:
