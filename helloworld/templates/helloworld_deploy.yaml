@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - image: lentidas/helloworld-devops-stack:0.0.1-alpha
-        name: helloworld-devops-stack-nginx
+        name: helloworld-devops-stack
         ports:
         - containerPort: 80
           protocol: TCP
