@@ -9,7 +9,7 @@ metadata:
     kubernetes.io/ingress.allow-http: "true"
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
-  name: nginx-ingress
+  name: helloworld-devops-stack-ingress
 spec:
   rules:
   - host: 34.252.10.234.traefik.me
@@ -17,7 +17,7 @@ spec:
       paths:
       - backend:
           service:
-            name: nginx-clusterip
+            name: helloworld-devops-stack-clusterip
             port:
               number: 8888
         path: /
@@ -25,13 +25,13 @@ spec:
   tls:
   - hosts:
     - 34.252.10.234.traefik.me
-    secretName: nginx-ingress-tls-cert
+    secretName: helloworld-devops-stack-ingress-tls-cert
 ---
 # Ingress to redirect HTTP to HTTPS using the middleware
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: nginx-redirect-https
+  name: helloworld-devops-stack-redirect-https
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web
     traefik.ingress.kubernetes.io/router.middlewares: {{ .Release.Namespace }}-redirect-https@kubernetescrd
@@ -42,9 +42,9 @@ spec:
       paths:
       - backend:
           service:
-            name: nginx-clusterip
+            name: helloworld-devops-stack-clusterip
             port:
-              number: 8888
+              number: 8080
         path: /
         pathType: ImplementationSpecific
 ---

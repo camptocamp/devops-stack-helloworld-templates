@@ -2,21 +2,21 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: nginx
-  name: nginx
+    app: helloworld-devops-stack
+  name: helloworld-devops-stack
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nginx
+      app: helloworld-devops-stack
   template:
     metadata:
       labels:
         app: nginx
     spec:
       containers:
-      - image: nginx
-        name: nginx
+      - image: lentidas/helloworld-devops-stack:0.0.1-alpha
+        name: helloworld-devops-stack-nginx
         ports:
         - containerPort: 80
           protocol: TCP
