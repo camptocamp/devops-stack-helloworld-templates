@@ -9,9 +9,9 @@ spec:
   - interval: 30s
     path: /metrics
     port: metrics
-  # namespaceSelector:
-  #   matchNames:
-  #   - helloworld
+  namespaceSelector:
+    matchNames:
+    - helloworld
   selector:
     matchLabels:
       app: helloworld-devops-stack
