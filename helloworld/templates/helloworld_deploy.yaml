@@ -15,12 +15,29 @@ spec:
         app: helloworld-devops-stack
     spec:
       containers:
-      - image: lentidas/helloworld-devops-stack:0.0.1-alpha
-        name: helloworld-devops-stack
+      - image: lentidas/helloworld-devops-stack:0.0.2-alpha
+        name: helloworld
         ports:
         - containerPort: 80
+          name: helloworld_http
+          protocol: TCP
+        - containerPort: 8080
+          name: stub_status
           protocol: TCP
         resources:
           limits:
             memory: "128Mi"
             cpu: "500m"
+      - image: nginx/nginx-prometheus-exporter:latest
+        name: metrics
+        args:
+        - "-nginx.scrape-uri=http://helloworld:8080/stub_status"
+        ports:
+        - containerPort: 9113
+          protocol: TCP
+          name: metrics
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+
