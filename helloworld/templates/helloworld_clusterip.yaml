@@ -6,9 +6,14 @@ metadata:
   name: helloworld-devops-stack-clusterip
 spec:
   ports:
-  - port: 8080
+  - name: helloworld-http
+    port: 8080
     protocol: TCP
     targetPort: helloworld-http
+  - name: metrics
+    port: 9113
+    protocol: TCP
+    targetPort: metrics
   selector:
     app: helloworld-devops-stack
   type: ClusterIP
