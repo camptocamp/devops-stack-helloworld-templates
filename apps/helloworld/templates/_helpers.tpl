@@ -5,7 +5,7 @@
 
 {{/* Compute hash of the the configuration passed to define the links inside the static page */}}
 {{- define "devops-stack-helloworld-configmap.confighash" -}}
-{{- tpl ($.Files.Get "templates/helloworld_configmap.yaml") $ | sha256sum | trunc 7 }}
+{{- tpl ($.Files.Get "helloworld_hyperlinks_configmap.yaml") $ | sha256sum | trunc 7 }}
 {{- end -}}
 
 {{ /*Define selectors to be used (to be also used as templates)*/}}
