@@ -3,7 +3,7 @@ kind: ServiceMonitor
 metadata:
   name: {{ .Chart.Name }}-servicemonitor
   labels:
-    {{- include "devops-stack-helloworld.labels" $ | indent 4 }}
+    {{ include "devops-stack-helloworld.labels" $ | indent 4 }}
 spec:
   endpoints:
   - interval: 30s
