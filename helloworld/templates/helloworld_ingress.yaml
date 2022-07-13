@@ -9,7 +9,7 @@ metadata:
     kubernetes.io/ingress.allow-http: "true"
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
-  name: helloworld-devops-stack-ingress
+  name: devops-stack-helloworld-ingress
 spec:
   rules:
   - host: helloworld.apps.gh-v1test.is-sandbox.camptocamp.com
@@ -17,7 +17,7 @@ spec:
       paths:
       - backend:
           service:
-            name: helloworld-devops-stack-clusterip
+            name: devops-stack-helloworld-clusterip
             port:
               number: 8080
         path: /
@@ -25,13 +25,13 @@ spec:
   tls:
   - hosts:
     - apps.gh-v1test.is-sandbox.camptocamp.com
-    secretName: helloworld-devops-stack-ingress-tls-cert
+    secretName: devops-stack-helloworld-ingress-tls-cert
 ---
 # Ingress to redirect HTTP to HTTPS using the middleware
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: helloworld-devops-stack-redirect-https
+  name: devops-stack-helloworld-redirect-https
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web
     traefik.ingress.kubernetes.io/router.middlewares: {{ .Release.Namespace }}-redirect-https@kubernetescrd
@@ -42,7 +42,7 @@ spec:
       paths:
       - backend:
           service:
-            name: helloworld-devops-stack-clusterip
+            name: devops-stack-helloworld-clusterip
             port:
               number: 8080
         path: /

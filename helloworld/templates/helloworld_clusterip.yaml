@@ -2,8 +2,8 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: helloworld-devops-stack
-  name: helloworld-devops-stack-clusterip
+    app: devops-stack-helloworld
+  name: devops-stack-helloworld-clusterip
 spec:
   ports:
   - name: helloworld-http
@@ -15,5 +15,5 @@ spec:
     protocol: TCP
     targetPort: metrics
   selector:
-    app: helloworld-devops-stack
+    app: devops-stack-helloworld
   type: ClusterIP

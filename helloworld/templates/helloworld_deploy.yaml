@@ -2,20 +2,20 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: helloworld-devops-stack
-  name: helloworld-devops-stack
+    app: devops-stack-helloworld
+  name: devops-stack-helloworld
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: helloworld-devops-stack
+      app: devops-stack-helloworld
   template:
     metadata:
       labels:
-        app: helloworld-devops-stack
+        app: devops-stack-helloworld
     spec:
       containers:
-      - image: lentidas/helloworld-devops-stack:0.0.2-alpha
+      - image: lentidas/devops-stack-helloworld:0.0.2-alpha
         name: helloworld
         ports:
         - containerPort: 80
