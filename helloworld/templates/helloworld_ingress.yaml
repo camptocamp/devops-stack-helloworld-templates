@@ -12,7 +12,7 @@ metadata:
   name: helloworld-devops-stack-ingress
 spec:
   rules:
-  - host: 34.252.10.234.traefik.me
+  - host: helloworld.apps.gh-v1test.is-sandbox.camptocamp.com
     http:
       paths:
       - backend:
@@ -24,7 +24,7 @@ spec:
         pathType: ImplementationSpecific
   tls:
   - hosts:
-    - 34.252.10.234.traefik.me
+    - apps.gh-v1test.is-sandbox.camptocamp.com
     secretName: helloworld-devops-stack-ingress-tls-cert
 ---
 # Ingress to redirect HTTP to HTTPS using the middleware
@@ -37,7 +37,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.middlewares: {{ .Release.Namespace }}-redirect-https@kubernetescrd
 spec:
   rules:
-  - host: 34.252.10.234.traefik.me
+  - host: apps.gh-v1test.is-sandbox.camptocamp.com
     http:
       paths:
       - backend:
