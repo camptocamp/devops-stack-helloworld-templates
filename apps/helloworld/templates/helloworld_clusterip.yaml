@@ -8,7 +8,7 @@ spec:
   type: ClusterIP
   selector:
     matchLabels:
-{{ include "devops-stack-helloworld.selector" $ | indent 6 }}
+      {{- include "devops-stack-helloworld.selector" $ | nindent 6 }}
   ports:
   - name: helloworld-http
     port: 8080
