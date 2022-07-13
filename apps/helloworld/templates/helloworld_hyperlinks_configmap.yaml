@@ -2,6 +2,8 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: {{ .Chart.Name }}-hyperlinks-configmap
+  labels:
+    {{- include "devops-stack-helloworld.labels" $ | indent 4 }}
 data:
   hyperlinks.js: |-
     // TODO Add code here with templates to have links for argocd, prometheus, grafana, alermanager, devops stack, camptocamp
