@@ -2,18 +2,24 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: devops-stack-helloworld
-  name: devops-stack-helloworld
+    {{ include "devops-stack-helloworld.labels" . | indent 4 }}
+  name: {{ .Chart.Name }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: devops-stack-helloworld
+      {{ include "devops-stack-helloworld.selector" . | indent 6 }}
   template:
     metadata:
       labels:
-        app: devops-stack-helloworld
+        {{ include "devops-stack-helloworld.labels" . | indent 8 }}
     spec:
+      # Mount a volume containing the ConfigMap with the generated hyperlinks
+      volumes:
+      - name: commands-configmap
+        configMap:
+          name: {{ .Chart.Name }}-hyperlinks-configmap
+
       containers:
 
       # nginx-based container containing the helloworld static page
@@ -30,6 +36,10 @@ spec:
           limits:
             memory: "128Mi"
             cpu: "500m"
+        volumeMounts:
+        - name: commands-configmap
+          mountPath: /usr/share/nginx/html/src/js/hyperlinks.js
+          subPath: hyperlinks.js
       
       # nginx-exporter to parse the metrics in a readable format for Prometheus
       - image: nginx/nginx-prometheus-exporter:latest
@@ -45,3 +55,7 @@ spec:
             memory: "128Mi"
             cpu: "500m"
 
+# TODO Readiness probe?
+# TODO Config map to pass links to multiple services on the cluster
+# TODO Templating all this templates with Helm variables and create a values file maybe
+# TODO Pass logs to kubernetes --> done automatically I think, but to verify

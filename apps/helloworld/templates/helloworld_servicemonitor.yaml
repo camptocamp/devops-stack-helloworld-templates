@@ -2,8 +2,8 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   labels:
-    app: devops-stack-helloworld
-  name: devops-stack-helloworld-servicemonitor
+    {{ include "devops-stack-helloworld.labels" . | indent 4 }}
+  name: {{ .Chart.Name }}-servicemonitor
 spec:
   endpoints:
   - interval: 30s
@@ -11,7 +11,7 @@ spec:
     port: metrics
   namespaceSelector:
     matchNames:
-    - helloworld
+    - {{ .Release.Namespace }}
   selector:
     matchLabels:
-      app: devops-stack-helloworld
+      {{ include "devops-stack-helloworld.selector" . | indent 6 }}
