@@ -15,7 +15,9 @@ spec:
         app: devops-stack-helloworld
     spec:
       containers:
-      - image: lentidas/devops-stack-helloworld:0.0.2-alpha
+
+      # nginx-based container containing the helloworld static page
+      - image: lentidas/helloworld-devops-stack:0.0.2-alpha
         name: helloworld
         ports:
         - containerPort: 80
@@ -28,10 +30,12 @@ spec:
           limits:
             memory: "128Mi"
             cpu: "500m"
+      
+      # nginx-exporter to parse the metrics in a readable format for Prometheus
       - image: nginx/nginx-prometheus-exporter:latest
         name: metrics
         args:
-        - "-nginx.scrape-uri=http://localhost:8080/stub_status"
+        - "-nginx.scrape-uri=http://localhost:8080/stub_status" # Point to the port 8080 inside this pod that is served by the container above
         ports:
         - containerPort: 9113
           protocol: TCP
