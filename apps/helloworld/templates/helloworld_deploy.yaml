@@ -38,7 +38,7 @@ spec:
             cpu: "500m"
         volumeMounts:
         - name: commands-configmap
-          mountPath: /usr/share/nginx/html/src/js/hyperlinks.js
+          mountPath: /usr/share/nginx/html/assets/js/hyperlinks.js
           subPath: hyperlinks.js
       
       # nginx-exporter to parse the metrics in a readable format for Prometheus
