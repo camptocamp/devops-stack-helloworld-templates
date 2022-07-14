@@ -6,5 +6,83 @@ metadata:
     {{- include "devops-stack-helloworld.labels" $ | indent 4 }}
 data:
   hyperlinks.js: |-
-    // TODO Add code here with templates to have links for argocd, prometheus, grafana, alermanager, devops stack, camptocamp
-    // Multiple line test
+    const lists = [
+      {
+        heading: 'Applications',
+        links: [
+          {
+            title: 'Argo CD',
+            url: 'https://argocd.apps.{{ .Values.cluster.name }}.{{ .Values.cluster.domain }}/',
+          },
+          // {
+          //  title: 'Traefik Dashboard',
+          //  url: 'https://traefik.apps.{{ .Values.cluster.name }}.{{ .Values.cluster.domain }}/',
+          // },
+          {
+            title: 'Grafana',
+            url: 'https://grafana.apps.{{ .Values.cluster.name }}.{{ .Values.cluster.domain }}/',
+          },
+          {
+            title: 'Prometheus',
+            url: 'https://prometheus.apps.{{ .Values.cluster.name }}.{{ .Values.cluster.domain }}/',
+          },
+          {
+            title: 'Alertmanager',
+            url: 'https://alertmanager.apps.{{ .Values.cluster.name }}.{{ .Values.cluster.domain }}/',
+          },
+        ],
+      },
+      {
+        heading: 'DevOps Stack',
+        links: [
+          {
+            title: 'About',
+            url: 'https://devops-stack.io/',
+          },
+          {
+            title: 'Documentation',
+            url: 'https://devops-stack.io/docs/latest/',
+          },
+          {
+            title: 'Repository',
+            url: 'https://github.com/camptocamp/devops-stack',
+          },
+        ],
+      },
+      {
+        heading: 'Our Company',
+        links: [
+          {
+            title: 'Camptocamp',
+            url: 'https://www.camptocamp.com/',
+          },
+        ],
+      },
+    ]
+
+    function renderLists() {
+      const linksWrapper = document.querySelector('#links')
+
+      lists.forEach(list => {
+          const linksTemplate = list.links.map(link => {
+              return `
+          <li class="links__item">
+            <a class="links__link" href="${link.url}">${link.title}</a>
+          </li>
+        `
+          })
+
+          const template = `
+        <ul class="links">
+          <li class="links__item">
+            <span class="links__heading">${list.heading}</span>
+          </li>
+          ${linksTemplate.join('')}
+        </ul>
+      `
+
+          linksWrapper.insertAdjacentHTML('beforeend', template)
+      })
+    }
+
+    renderLists()
