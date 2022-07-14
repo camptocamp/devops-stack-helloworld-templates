@@ -3,12 +3,11 @@ kind: Service
 metadata:
   name: {{ .Chart.Name }}-clusterip
   labels:
-{{ include "devops-stack-helloworld.labels" $ | indent 4 }}
+    {{- include "devops-stack-helloworld.labels" $ | indent 4 }}
 spec:
   type: ClusterIP
   selector:
-    matchLabels:
-      {{- include "devops-stack-helloworld.selector" $ | nindent 6 }}
+    {{- include "devops-stack-helloworld.selector" $ | indent 4 }}
   ports:
   - name: helloworld-http
     port: 8080

@@ -3,16 +3,16 @@ kind: Deployment
 metadata:
   name: {{ .Chart.Name }}
   labels:
-{{ include "devops-stack-helloworld.labels" $ | indent 4 }}
+    {{- include "devops-stack-helloworld.labels" $ | indent 4 }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-{{ include "devops-stack-helloworld.selector" $ | indent 6 }}
+      {{- include "devops-stack-helloworld.selector" $ | indent 6 }}
   template:
     metadata:
       labels:
-{{ include "devops-stack-helloworld.labels" $ | indent 8 }}
+        {{- include "devops-stack-helloworld.labels" $ | indent 8 }}
     spec:
       # Mount a volume containing the ConfigMap with the generated hyperlinks
       volumes:
