@@ -23,7 +23,7 @@ spec:
       containers:
 
       # nginx-based container containing the helloworld static page
-      - image: ghcr.io/lentidas/lentidas/devops-stack-helloworld:latest # TODO change image here after transfering ownership of the repository
+      - image: ghcr.io/camptocamp/camptocamp/devops-stack-helloworld:latest
         name: helloworld
         ports:
         - containerPort: 80
