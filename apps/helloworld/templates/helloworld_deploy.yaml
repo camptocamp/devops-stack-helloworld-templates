@@ -23,7 +23,7 @@ spec:
       containers:
 
       # nginx-based container containing the helloworld static page
-      - image: ghcr.io/camptocamp/camptocamp/devops-stack-helloworld:latest
+      - image: ghcr.io/camptocamp/devops-stack-helloworld:latest
         name: helloworld
         ports:
         - containerPort: 80
