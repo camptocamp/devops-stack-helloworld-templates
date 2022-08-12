@@ -1,4 +1,4 @@
-# helloworld-devops-stack-templates
+# devops-stack-helloworld-templates
 
 Helm templates used to deploy the start page for the [DevOps Stack](https://devops-stack.io).
 
