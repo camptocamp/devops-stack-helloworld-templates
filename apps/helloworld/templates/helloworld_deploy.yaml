@@ -16,7 +16,7 @@ spec:
     spec:
       # Mount a volume containing the ConfigMap with the generated hyperlinks
       volumes:
-      - name: commands-configmap
+      - name: hyperlinks-configmap
         configMap:
           name: {{ .Chart.Name }}-hyperlinks-configmap
 
@@ -37,7 +37,7 @@ spec:
             memory: "128Mi"
             cpu: "500m"
         volumeMounts:
-        - name: commands-configmap
+        - name: hyperlinks-configmap
           mountPath: /usr/share/nginx/html/assets/js/hyperlinks.js
           subPath: hyperlinks.js
       
