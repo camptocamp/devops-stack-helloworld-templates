@@ -1,7 +1,0 @@
----
-apps:
-  traefik: false
-  grafana: false
-  prometheus: false
-  thanos: false
-  alertmanager: false
