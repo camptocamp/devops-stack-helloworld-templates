@@ -5,7 +5,7 @@ metadata:
   labels:
     {{- include "devops-stack-helloworld.labels" $ | indent 4 }}
   annotations:
-    checksum: {{ include (print $.Template.BasePath "/helloworld_hyperlinks_configmap.yaml") . | sha256sum }}
+    helloworld-configmap-checksum: {{ include "devops-stack-helloworld-configmap.checksum" . }}
 spec:
   replicas: 1
   selector:
