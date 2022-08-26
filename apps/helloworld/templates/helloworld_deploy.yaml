@@ -4,6 +4,8 @@ metadata:
   name: {{ .Chart.Name }}
   labels:
     {{- include "devops-stack-helloworld.labels" $ | indent 4 }}
+  annotations:
+    checksum: {{ include (print $.Template.BasePath "/helloworld_hyperlinks_configmap.yaml") . | sha256sum }}
 spec:
   replicas: 1
   selector:
