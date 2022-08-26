@@ -14,19 +14,19 @@ data:
             title: 'Argo CD',
             url: 'https://argocd.apps.{{ .Values.cluster.name }}.{{ .Values.cluster.domain }}/',
           },
-          {{- if .Values.apps.traefik_dashboard true | default false -}}
+          {{- if .Values.apps.traefik_dashboard true -}}
           {
             title: 'Traefik Dashboard',
             url: 'https://traefik.apps.{{ .Values.cluster.name }}.{{ .Values.cluster.domain }}/',
           },
           {{- end -}}
-          {{- if .Values.apps.grafana true | default false -}}
+          {{- if .Values.apps.grafana true -}}
           {
             title: 'Grafana',
             url: 'https://grafana.apps.{{ .Values.cluster.name }}.{{ .Values.cluster.domain }}/',
           },
           {{- end -}}
-          {{- if .Values.apps.thanos true | default false -}}
+          {{- if .Values.apps.thanos true -}}
           {
             title: 'Thanos Query',
             url: 'https://thanos-query.apps.{{ .Values.cluster.name }}.{{ .Values.cluster.domain }}/',
@@ -36,13 +36,13 @@ data:
             url: 'https://thanos-bucketweb.apps.{{ .Values.cluster.name }}.{{ .Values.cluster.domain }}/',
           },
           {{- end -}}
-          {{- if .Values.apps.prometheus true | default false -}}
+          {{- if .Values.apps.prometheus true -}}
           {
             title: 'Prometheus',
             url: 'https://prometheus.apps.{{ .Values.cluster.name }}.{{ .Values.cluster.domain }}/',
           },
           {{- end -}}
-          {{- if .Values.apps.alertmanager true | default false -}}
+          {{- if .Values.apps.alertmanager true -}}
           {
             title: 'Alertmanager',
             url: 'https://alertmanager.apps.{{ .Values.cluster.name }}.{{ .Values.cluster.domain }}/',
