@@ -1,0 +1,7 @@
+---
+apps:
+  traefik_dashboard: false
+  grafana: false
+  prometheus: false
+  thanos: false
+  alertmanager: false

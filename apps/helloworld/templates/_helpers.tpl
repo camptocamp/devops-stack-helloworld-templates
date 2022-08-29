@@ -4,8 +4,8 @@
 {{ end -}}
 
 {{/* Compute hash of the the configuration passed to define the links inside the static page */}}
-{{- define "devops-stack-helloworld-configmap.confighash" }}
-{{- tpl ($.Files.Get "helloworld_hyperlinks_configmap.yaml") $ | sha256sum | trunc 7 -}}
+{{- define "devops-stack-helloworld-configmap.checksum" }}
+{{- tpl ($.Files.Get "helloworld_hyperlinks_configmap.yaml") $ | sha256sum | trunc 14 -}}
 {{ end -}}
 
 {{/* Define selectors to be used (to be also used as templates) */}}
@@ -22,6 +22,6 @@ app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{ end -}}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 helm.sh/chart: {{ include "devops-stack-helloworld.chart" . }}
-helloworld-configmap-hash: {{ include "devops-stack-helloworld-configmap.confighash" . }}
+helloworld-configmap-hash: {{ include "devops-stack-helloworld-configmap.checksum" . }}
 {{- end -}}
 {{/* End labels */}}
