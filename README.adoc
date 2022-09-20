@@ -35,18 +35,22 @@ To use this app, you will need to add the following block to you Terraform code 
 
 [source,terraform]
 ----
-module "helloworld" {
-  source           = "git::https://github.com/camptocamp/devops-stack-module-applicationset.git/"
-  name             = "apps"
-  argocd_namespace = "argocd"
-  namespace        = "helloworld"
+module "helloworld_apps" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-applicationset.git"
 
   depends_on = [module.argocd]
+
+  name                   = "helloworld-apps"
+  argocd_namespace       = local.argocd_namespace
+  project_dest_namespace = "*"
+  project_source_repos = [
+    "https://github.com/camptocamp/devops-stack-helloworld-templates.git",
+  ]
 
   generators = [
     {
       git = {
-        repoURL  = "https://github.com/camptocamp/devops-stack-helloworld-templates.git/"
+        repoURL  = "https://github.com/camptocamp/devops-stack-helloworld-templates.git"
         revision = "main"
 
         directories = [
@@ -63,34 +67,40 @@ module "helloworld" {
     }
 
     spec = {
-      project = "default"
+      project = "helloworld-apps"
 
       source = {
-        repoURL        = "https://github.com/camptocamp/devops-stack-helloworld-templates.git/"
+        repoURL        = "https://github.com/camptocamp/devops-stack-helloworld-templates.git"
         targetRevision = "main"
         path           = "{{path}}"
 
         helm = {
           valueFiles = []
           # The following value defines this global variables that will be available to all apps in apps/*
-          # This apps needs these to generate the ingresses containing the name and base domain of the cluster. 
-          values     = <<-EOT
+          # These are needed to generate the ingresses containing the name and base domain of the cluster.
+          values = <<-EOT
             cluster:
               name: "${module.eks.cluster_name}"
               domain: "${module.eks.base_domain}"
+            apps:
+              grafana: ${module.grafana.grafana_enabled || module.monitoring.grafana_enabled}
+              prometheus: ${module.monitoring.prometheus_enabled}
+              thanos: ${module.thanos.thanos_enabled}
+              alertmanager: ${module.monitoring.alertmanager_enabled}
           EOT
         }
       }
 
       destination = {
-        server    = "https://kubernetes.default.svc"
+        name      = "in-cluster"
         namespace = "{{path.basename}}"
       }
-      
+
       syncPolicy = {
         automated = {
-          selfHeal = true
-          prune    = true
+          allowEmpty = false
+          selfHeal   = true
+          prune      = true
         }
         syncOptions = [
           "CreateNamespace=true"
