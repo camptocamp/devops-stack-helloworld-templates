@@ -83,10 +83,10 @@ module "helloworld_apps" {
               name: "${module.eks.cluster_name}"
               domain: "${module.eks.base_domain}"
             apps:
-              grafana: ${module.grafana.grafana_enabled || module.monitoring.grafana_enabled}
-              prometheus: ${module.monitoring.prometheus_enabled}
-              thanos: ${module.thanos.thanos_enabled}
-              alertmanager: ${module.monitoring.alertmanager_enabled}
+              grafana: true
+              prometheus: true
+              thanos: true
+              alertmanager: true
           EOT
         }
       }
