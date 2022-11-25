@@ -1,4 +1,6 @@
 ---
+cluster:
+  issuer: ca-issuer
 apps:
   traefik_dashboard: false
   grafana: false
