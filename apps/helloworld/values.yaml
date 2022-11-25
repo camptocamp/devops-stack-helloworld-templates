@@ -1,6 +1,9 @@
 ---
 cluster:
   issuer: ca-issuer
+
+image: ghcr.io/camptocamp/devops-stack-helloworld:latest
+
 apps:
   traefik_dashboard: false
   grafana: false
