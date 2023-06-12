@@ -5,8 +5,9 @@ cluster:
 image: ghcr.io/camptocamp/devops-stack-helloworld:latest
 
 apps:
-  traefik_dashboard: false
+  traefik: false
+  longhorn: false
+  minio: false
   grafana: false
   prometheus: false
   thanos: false
-  alertmanager: false
