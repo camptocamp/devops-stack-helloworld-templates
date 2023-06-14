@@ -5,9 +5,10 @@ cluster:
 image: ghcr.io/camptocamp/devops-stack-helloworld:latest
 
 apps:
+  keycloak: false
   traefik: false
   longhorn: false
   minio: false
-  grafana: false
-  prometheus: false
+  grafana: true
+  prometheus: true
   thanos: false
