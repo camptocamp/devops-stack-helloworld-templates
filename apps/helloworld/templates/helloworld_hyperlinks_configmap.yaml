@@ -14,6 +14,12 @@ data:
             title: 'Argo CD',
             url: 'https://argocd.apps.{{ .Values.cluster.name }}.{{ .Values.cluster.domain }}/',
           },
+          {{- if .Values.apps.keycloak }}
+          {
+            title: 'Keycloak',
+            url: 'https://keycloak.apps.{{ .Values.cluster.name }}.{{ .Values.cluster.domain }}/',
+          },
+          {{- end -}}
           {{- if .Values.apps.traefik }}
           {
             title: 'Traefik Dashboard',
