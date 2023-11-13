@@ -4,8 +4,6 @@ metadata:
   name: {{ .Chart.Name }}
   labels:
     {{- include "devops-stack-helloworld.labels" $ | indent 4 }}
-  annotations:
-    helloworld-configmap-checksum: {{ include "devops-stack-helloworld-configmap.checksum" . }}
 spec:
   replicas: 1
   selector:
@@ -15,6 +13,9 @@ spec:
     metadata:
       labels:
         {{- include "devops-stack-helloworld.labels" $ | indent 8 }}
+      annotations:
+        # Compute hash of the the configuration passed to define the links inside the static page
+        helloworld-configmap-checksum: {{ include (print $.Template.BasePath "/helloworld_hyperlinks_configmap.yaml") . | sha256sum | trunc 32 }}
     spec:
       # Mount a volume containing the ConfigMap with the generated hyperlinks
       volumes:
@@ -40,7 +41,7 @@ spec:
             cpu: "100m"
           limits:
             memory: "128Mi"
-            cpu: "500m"
+            cpu: "200m"
         volumeMounts:
         - name: hyperlinks-configmap
           mountPath: /usr/share/nginx/html/assets/js/hyperlinks.js
@@ -61,4 +62,4 @@ spec:
             cpu: "100m"
           limits:
             memory: "128Mi"
-            cpu: "500m"
+            cpu: "200m"
