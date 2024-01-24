@@ -12,56 +12,56 @@ data:
         links: [
           {
             title: 'Argo CD',
-            url: 'https://argocd.apps.{{ .Values.cluster.name }}.{{ .Values.cluster.domain }}/',
+            url: 'https://argocd.{{ printf "%s.%s.%s" .Values.cluster.subdomain .Values.cluster.name .Values.cluster.domain  | trimPrefix "." }}/',
           },
           {{- if .Values.apps.keycloak }}
           {
             title: 'Keycloak',
-            url: 'https://keycloak.apps.{{ .Values.cluster.name }}.{{ .Values.cluster.domain }}/',
+            url: 'https://keycloak.{{ printf "%s.%s.%s" .Values.cluster.subdomain .Values.cluster.name .Values.cluster.domain  | trimPrefix "." }}/',
           },
           {{- end -}}
           {{- if .Values.apps.traefik }}
           {
             title: 'Traefik Dashboard',
-            url: 'https://traefik.apps.{{ .Values.cluster.name }}.{{ .Values.cluster.domain }}/',
+            url: 'https://traefik.{{ printf "%s.%s.%s" .Values.cluster.subdomain .Values.cluster.name .Values.cluster.domain  | trimPrefix "." }}/',
           },
           {{- end -}}
           {{- if .Values.apps.minio }}
           {
             title: 'MinIO Console',
-            url: 'https://minio.apps.{{ .Values.cluster.name }}.{{ .Values.cluster.domain }}/',
+            url: 'https://minio.{{ printf "%s.%s.%s" .Values.cluster.subdomain .Values.cluster.name .Values.cluster.domain  | trimPrefix "." }}/',
           },
           {{- end -}}
           {{- if .Values.apps.longhorn }}
           {
             title: 'Longhorn Dashboard',
-            url: 'https://longhorn.apps.{{ .Values.cluster.name }}.{{ .Values.cluster.domain }}/',
+            url: 'https://longhorn.{{ printf "%s.%s.%s" .Values.cluster.subdomain .Values.cluster.name .Values.cluster.domain  | trimPrefix "." }}/',
           },
           {{- end -}}
           {{- if .Values.apps.grafana }}
           {
             title: 'Grafana',
-            url: 'https://grafana.apps.{{ .Values.cluster.name }}.{{ .Values.cluster.domain }}/',
+            url: 'https://grafana.{{ printf "%s.%s.%s" .Values.cluster.subdomain .Values.cluster.name .Values.cluster.domain  | trimPrefix "." }}/',
           },
           {{- end -}}
           {{- if .Values.apps.prometheus }}
           {
             title: 'Prometheus',
-            url: 'https://prometheus.apps.{{ .Values.cluster.name }}.{{ .Values.cluster.domain }}/',
+            url: 'https://prometheus.{{ printf "%s.%s.%s" .Values.cluster.subdomain .Values.cluster.name .Values.cluster.domain  | trimPrefix "." }}/',
           },
           {
             title: 'Alertmanager',
-            url: 'https://alertmanager.apps.{{ .Values.cluster.name }}.{{ .Values.cluster.domain }}/',
+            url: 'https://alertmanager.{{ printf "%s.%s.%s" .Values.cluster.subdomain .Values.cluster.name .Values.cluster.domain  | trimPrefix "." }}/',
           },
           {{- end }}
           {{- if .Values.apps.thanos }}
           {
             title: 'Thanos Query',
-            url: 'https://thanos-query.apps.{{ .Values.cluster.name }}.{{ .Values.cluster.domain }}/',
+            url: 'https://thanos-query.{{ printf "%s.%s.%s" .Values.cluster.subdomain .Values.cluster.name .Values.cluster.domain  | trimPrefix "." }}/',
           },
           {
             title: 'Thanos Bucketweb',
-            url: 'https://thanos-bucketweb.apps.{{ .Values.cluster.name }}.{{ .Values.cluster.domain }}/',
+            url: 'https://thanos-bucketweb.{{ printf "%s.%s.%s" .Values.cluster.subdomain .Values.cluster.name .Values.cluster.domain  | trimPrefix "." }}/',
           },
           {{- end -}}
         ],

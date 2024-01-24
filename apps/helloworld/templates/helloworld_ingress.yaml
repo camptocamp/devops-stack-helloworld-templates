@@ -12,7 +12,7 @@ metadata:
   name: {{ .Chart.Name }}-ingress
 spec:
   rules:
-  - host: helloworld.apps.{{ .Values.cluster.name }}.{{ .Values.cluster.domain }}
+  - host: "helloworld.{{ printf "%s.%s.%s" .Values.cluster.subdomain .Values.cluster.name .Values.cluster.domain | trimPrefix "." }}"
     http:
       paths:
       - backend:
@@ -24,5 +24,5 @@ spec:
         pathType: ImplementationSpecific
   tls:
   - hosts:
-    - helloworld.apps.{{ .Values.cluster.name }}.{{ .Values.cluster.domain }}
+    - "helloworld.{{ printf "%s.%s.%s" .Values.cluster.subdomain .Values.cluster.name .Values.cluster.domain | trimPrefix "." }}"
     secretName: devops-stack-helloworld-ingress-tls-cert
