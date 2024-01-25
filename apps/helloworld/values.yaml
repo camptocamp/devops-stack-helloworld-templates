@@ -1,6 +1,6 @@
 ---
 cluster:
-  issuer: ca-issuer
+  issuer: selfsigned-issuer
   subdomain: "apps"
 
 image: ghcr.io/camptocamp/devops-stack-helloworld:latest
