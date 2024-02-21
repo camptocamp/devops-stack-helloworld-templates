@@ -22,7 +22,18 @@ spec:
               number: 8080
         path: /
         pathType: ImplementationSpecific
+  - host: "helloworld.{{ printf "%s.%s" .Values.cluster.subdomain .Values.cluster.domain | trimPrefix "." }}"
+    http:
+      paths:
+      - backend:
+          service:
+            name: {{ .Chart.Name }}-clusterip
+            port:
+              number: 8080
+        path: /
+        pathType: ImplementationSpecific
   tls:
   - hosts:
     - "helloworld.{{ printf "%s.%s.%s" .Values.cluster.subdomain .Values.cluster.name .Values.cluster.domain | trimPrefix "." }}"
+    - "helloworld.{{ printf "%s.%s" .Values.cluster.subdomain .Values.cluster.domain | trimPrefix "." }}"
     secretName: devops-stack-helloworld-ingress-tls-cert
