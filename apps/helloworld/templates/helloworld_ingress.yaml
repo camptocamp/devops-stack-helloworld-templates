@@ -5,8 +5,6 @@ kind: Ingress
 metadata:
   annotations:
     cert-manager.io/cluster-issuer: {{ .Values.cluster.issuer }}
-    ingress.kubernetes.io/ssl-redirect: "true"
-    kubernetes.io/ingress.allow-http: "true"
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
   name: {{ .Chart.Name }}-ingress
